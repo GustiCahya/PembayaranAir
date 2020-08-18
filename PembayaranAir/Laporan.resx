@@ -117,38 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="no_pel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="LaporanReport1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
-  <metadata name="nama_pelanggan.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="bulan.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="stand_meter.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tagihan.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="idx_bulan.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tahun.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btn_print.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAV9JREFUOE99
-        000rRUEcx3HkIRtKbCiUhdgoC7HwsFS4nhaShUixQ1IWnhNCSKJEsmWBPOzsbLwOL+T6fm8zOm5YfM6c
-        mfOb/5kzd25OOp2O+vCMNaz/wWdmzGbmJQtMYCTR/4sZs5l+8sF4kBz7zY9cHOzCO/pD/z9mzDrnu4Df
-        dIvu0P9PDx4wYN+BTZzhFadYxW8bGF3iPrTbFrjDInaxgDpUoAo1qEdDQjXKUYsbCxziHG/YwyB2MIZ2
-        5CMuP9uyF5dcikoUwLc3whWUIXtS0nrmkjWYl7jPhUULg2IksxtellCELVjMQzKDqXA/GcR7M2ads2SB
-        adh+wk1sRRvcCyfEg2PBZpgxm5nr5RE+/ICb5plYwQGucBE8oRdmzDrn0QIp+KZj+NZOXOMIFrHdh5km
-        DOEk9FMWiDxZoyhBB/wM+cYWxJw/73Dsx0G59Be4qbOYD+ZC62dl/Z3TOV//ckKuOY4PqAAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
 </root>

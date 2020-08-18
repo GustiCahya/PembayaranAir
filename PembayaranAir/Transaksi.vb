@@ -7,14 +7,20 @@ Public Class Transaksi
 
     Public nopel As String
     Public nama As String
+    Public alamat As String
+    Public golongan As String
+    Public sekarang As String = Date.Now.ToString("d/M/yyyy")
     Public indexBulan As Integer
+    Public currentTahun As Integer
     Public bulanTbl As String
 
     Private Sub handleTanggal()
         'Handle dtp_tanggal
-        Dim daftarBulan As String() = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"}
+        Dim daftarBulan As String() = {"JAN", "FEB", "MAR", "APR", "MEI", "JUN", "JUL", "AGU", "SEP", "OKT", "NOV", "DES"}
         indexBulan = dtp_tgl.Value.Month - 2
+        currentTahun = dtp_tgl.Value.Year
         If indexBulan < 0 Then
+            currentTahun -= 1
             indexBulan = 11
         End If
         bulanTbl = daftarBulan(indexBulan)
@@ -43,6 +49,8 @@ Public Class Transaksi
             If dt.Rows.Count = 1 Then
                 nopel = dt.Rows(0).Item(0).ToString()
                 nama = dt.Rows(0).Item(1).ToString()
+                alamat = dt.Rows(0).Item(2).ToString()
+                golongan = dt.Rows(0).Item(3).ToString()
 
                 tb_nama.Text = dt.Rows(0).Item(1).ToString()
                 tb_alamat.Text = dt.Rows(0).Item(2).ToString()
@@ -86,6 +94,7 @@ Public Class Transaksi
                         .Rows(index).Cells(2).Value = bulanTbl
                         .Rows(index).Cells(3).Value = "-"
                         .Rows(index).Cells("idx_bulan").Value = indexBulan
+                        .Rows(index).Cells("tahun").Value = currentTahun
                     End With
                     Dim tanggal As Date = Date.Parse(dtp_tgl.Value)
                     dtp_tgl.Value = tanggal.AddMonths(-1)
@@ -100,6 +109,7 @@ Public Class Transaksi
                     .Rows(index).Cells(2).Value = bulanTbl
                     .Rows(index).Cells(3).Value = "-"
                     .Rows(index).Cells("idx_bulan").Value = indexBulan
+                    .Rows(index).Cells("tahun").Value = currentTahun
                 End With
                 Dim tanggal As Date = Date.Parse(dtp_tgl.Value)
                 dtp_tgl.Value = tanggal.AddMonths(-1)
@@ -111,8 +121,8 @@ Public Class Transaksi
         End If
     End Sub
 
+    'Layouting Print
     Dim dtItem As DataTable
-
     Private Sub Data_Load()
         dtItem = New DataTable
         With dtItem.Columns
@@ -121,41 +131,68 @@ Public Class Transaksi
         End With
 
         Dim ItemRow As DataRow
-        '=== New Row ===
-        ItemRow = dtItem.NewRow()
+        For i = 0 To DataGridView1.RowCount - 2
+            With DataGridView1.Rows(i)
 
-        'Left Side
-        ItemRow("leftSide") = vbCrLf
-        ItemRow("leftSide") &= "     " & "UD. CAHYA UTAMA" & vbCrLf
-        ItemRow("leftSide") &= "     " & "==========================" & vbCrLf
-        ItemRow("leftSide") &= "     " & "TGL. BAYAR : 18/08/2020" & vbCrLf
-        ItemRow("leftSide") &= "     " & "NO PEL     : 010200286" & vbCrLf
-        ItemRow("leftSide") &= "     " & "NAMA       : SOETOMO" & vbCrLf
-        ItemRow("leftSide") &= "     " & "ALT        : GG SDM IV/8" & vbCrLf
-        ItemRow("leftSide") &= "     " & "BLN. REK   : JUL 2020" & vbCrLf
-        ItemRow("leftSide") &= "     " & "GOL.       : 2B" & vbCrLf
-        ItemRow("leftSide") &= "     " & "STND MTR   : 382-358=24" & vbCrLf
-        ItemRow("leftSide") &= "     " & "TAG        : Rp.   90.600" & vbCrLf
-        ItemRow("leftSide") &= "     " & "ADMIN      : Rp.   2.500" & vbCrLf
-        ItemRow("leftSide") &= "     " & "TOTAL      : Rp.   93100" & vbCrLf
+                Dim bulan As String = .Cells("bulan").Value
+                Dim tahun As String = .Cells("tahun").Value
+                Dim stand_meter As String = .Cells("stand_meter").Value
+                Dim tagihan As Integer = .Cells("tagihan").Value
+                Dim admin As Integer = 2500
+                Dim tagihanWithAdmin As Integer = tagihan + admin
+
+                Dim f_tagihan As String = String.Format("{0:#,#}", tagihan).Replace(",", ".")
+                Dim f_admin As String = String.Format("{0:#,#}", admin).Replace(",", ".")
+                Dim f_total As String = String.Format("{0:#,#}", tagihanWithAdmin).Replace(",", ".")
+
+                '=== New Row ===
+                ItemRow = dtItem.NewRow()
+
+                'Left Side
+                ItemRow("leftSide") = vbCrLf
+                ItemRow("leftSide") &= vbCrLf
+                ItemRow("leftSide") &= "     " & "UD. CAHYA UTAMA" & vbCrLf
+                ItemRow("leftSide") &= "     " & "==========================" & vbCrLf
+                ItemRow("leftSide") &= "     " & "TGL. BAYAR : " & sekarang & vbCrLf
+                ItemRow("leftSide") &= "     " & "NO PEL     : " & nopel & vbCrLf
+                ItemRow("leftSide") &= "     " & "NAMA       : " & nama & vbCrLf
+                ItemRow("leftSide") &= "     " & "ALT        : " & alamat & vbCrLf
+                ItemRow("leftSide") &= "     " & "BLN. REK   : " & bulan & " " & tahun & vbCrLf
+                ItemRow("leftSide") &= "     " & "GOL.       : " & golongan & vbCrLf
+                ItemRow("leftSide") &= "     " & "STND MTR   : " & stand_meter & vbCrLf
+                ItemRow("leftSide") &= "     " & "TAG        : Rp.   " & f_tagihan & vbCrLf
+                If tagihan >= 100000 Then
+                    ItemRow("leftSide") &= "     " & "ADMIN      : Rp.     " & f_admin & vbCrLf
+                Else
+                    ItemRow("leftSide") &= "     " & "ADMIN      : Rp.    " & f_admin & vbCrLf
+                End If
+
+                ItemRow("leftSide") &= "     " & "TOTAL      : Rp.   " & f_total & vbCrLf
 
 
-        'Right Side
-        ItemRow("rightSide") = vbCrLf
-        ItemRow("rightSide") &= "TANDA TERIMA PEMBAYARAN REKENING PDAM MATARAM" & vbCrLf
-        ItemRow("rightSide") &= "=======================================================================" & vbCrLf
-        ItemRow("rightSide") &= "BLN. REK     : JUL 2020" & "                     " & "TGL. BAYAR  : 18/08/2020" & vbCrLf
-        ItemRow("rightSide") &= "NO. SAMB     : 010200286" & "      " & "Gol.: 2B" & "      " & "STND MTR  : 382 - 358 = 24" & vbCrLf
-        ItemRow("rightSide") &= "NAMA         : SOETOMO" & vbCrLf
-        ItemRow("rightSide") &= "ALAMAT       : GG SDN IV/8" & vbCrLf
-        ItemRow("rightSide") &= "TAGIHAN PDAM : Rp.          90.600" & vbCrLf
-        ItemRow("rightSide") &= "ADMIN FEE    : Rp.           2.500" & vbCrLf
-        ItemRow("rightSide") &= "TOTAL BAYAR  : Rp.          93.100" & vbCrLf
-        ItemRow("rightSide") &= "Loket CAHYA UTAMA Menyatakan Struk ini Sebagai Bukti Yang Sah" & vbCrLf
-        ItemRow("rightSide") &= "MOHON UNTUK DISIMPAN." & vbCrLf
-        ItemRow("rightSide") &= " " & vbCrLf
-        ItemRow("rightSide") &= "RINCIAN TAGIHAN DAPAT DIAKSES DI KANTOR PDAM GIRI MENANG - MATARAM. TELP. 0370-632510" & vbCrLf
-        dtItem.Rows.Add(ItemRow)
+                'Right Side
+                ItemRow("rightSide") = vbCrLf
+                ItemRow("rightSide") &= vbCrLf
+                ItemRow("rightSide") &= "TANDA TERIMA PEMBAYARAN REKENING PDAM MATARAM" & vbCrLf
+                ItemRow("rightSide") &= "=======================================================================" & vbCrLf
+                ItemRow("rightSide") &= "BLN. REK     : " & bulan & " " & tahun & "                       " & "TGL. BAYAR  : " & sekarang & vbCrLf
+                ItemRow("rightSide") &= "NO. SAMB     : " & nopel & "        " & "Gol.: " & golongan & "      " & "STND MTR    : " & stand_meter & vbCrLf
+                ItemRow("rightSide") &= "NAMA         : " & nama & vbCrLf
+                ItemRow("rightSide") &= "ALAMAT       : " & alamat & vbCrLf
+                ItemRow("rightSide") &= "TAGIHAN PDAM : Rp.          " & f_tagihan & vbCrLf
+                If tagihan >= 100000 Then
+                    ItemRow("rightSide") &= "ADMIN FEE    : Rp.            " & f_admin & vbCrLf
+                Else
+                    ItemRow("rightSide") &= "ADMIN FEE    : Rp.           " & f_admin & vbCrLf
+                End If
+                ItemRow("rightSide") &= "TOTAL BAYAR  : Rp.          " & f_total & vbCrLf
+                ItemRow("rightSide") &= "Loket CAHYA UTAMA Menyatakan Struk ini Sebagai Bukti Yang Sah" & vbCrLf
+                ItemRow("rightSide") &= "MOHON UNTUK DISIMPAN." & vbCrLf
+                ItemRow("rightSide") &= " " & vbCrLf
+                ItemRow("rightSide") &= "RINCIAN TAGIHAN DAPAT DIAKSES DI KANTOR PDAM GIRI MENANG - MATARAM. TELP. 0370-632510" & vbCrLf
+                dtItem.Rows.Add(ItemRow)
+            End With
+        Next
 
     End Sub
 
@@ -164,53 +201,61 @@ Public Class Transaksi
             Select Case MsgBox("Yakin mau diprint?", MsgBoxStyle.YesNo + vbQuestion)
                 Case MsgBoxResult.Yes
 
-                    Data_Load()
+                    If chk_hanya_add.Checked <> True Then
+                        Data_Load()
+                        Printer.NewPrint()
 
-                    Printer.NewPrint()
+                        Dim c As New PrintingFormat
+                        Dim arrWidth() As Integer = {265, 529}
+                        Dim arrFormat() As StringFormat = {c.MidLeft, c.MidLeft}
 
-                    Dim c As New PrintingFormat
-                    Dim arrWidth() As Integer = {265, 529}
-                    Dim arrFormat() As StringFormat = {c.MidLeft, c.MidLeft}
+                        'looping item sales | loop item penjualan
+                        For r = 0 To dtItem.Rows.Count - 1
+                            Printer.Print(dtItem.Rows(r).Item("leftSide") & ";" &
+                          dtItem.Rows(r).Item("rightSide") & ";", arrWidth, arrFormat)
+                        Next
+                        Printer.DoPrint()
+                        If chk_hanya_print.Checked = True Then
+                            DataGridView1.Rows.Clear()
+                            DataGridView1.Refresh()
+                        End If
+                        clear()
+                        tb_nopel.Text = ""
+                    End If
 
-                    'looping item sales | loop item penjualan
-                    For r = 0 To dtItem.Rows.Count - 1
-                        Printer.Print(dtItem.Rows(r).Item("leftSide") & ";" &
-                      dtItem.Rows(r).Item("rightSide") & ";", arrWidth, arrFormat)
-                    Next
+                    If chk_hanya_print.Checked <> True Then
+                        Try
+                            cn.Open()
+                            Dim cm = New OleDbCommand("INSERT INTO tagihan (no_pel, jumlah_bulan, tagihan, created_at, is_paid) 
+                                           VALUES (@no_pel, @jumlah_bulan, @tagihan, @created_at, @is_paid)", cn)
 
-                    Printer.DoPrint()
+                            Dim tagihan As Integer
+                            Dim jumlah_bulan As Integer = DataGridView1.RowCount - 1
 
-                    'Try
-                    '    cn.Open()
-                    '    Dim cm = New OleDbCommand("INSERT INTO tagihan (no_pel, jumlah_bulan, tagihan, created_at, is_paid) 
-                    '                       VALUES (@no_pel, @jumlah_bulan, @tagihan, @created_at, @is_paid)", cn)
+                            For i = 0 To DataGridView1.RowCount - 2
+                                tagihan += DataGridView1.Rows(i).Cells("tagihan").Value
+                            Next
 
-                    '    Dim tagihan As Integer
-                    '    Dim jumlah_bulan As Integer = DataGridView1.RowCount - 1
+                            With DataGridView1.Rows(0)
+                                cm.Parameters.AddWithValue("@no_pel", .Cells("no_pel").Value)
+                                cm.Parameters.AddWithValue("@jumlah_bulan", jumlah_bulan)
+                                cm.Parameters.AddWithValue("@tagihan", tagihan)
+                                cm.Parameters.AddWithValue("@created_at", Date.Now.ToString("d/M/yyyy H:m:ss"))
+                                cm.Parameters.AddWithValue("@is_paid", False)
+                            End With
 
-                    '    For i = 0 To DataGridView1.RowCount - 2
-                    '        tagihan += DataGridView1.Rows(i).Cells("tagihan").Value
-                    '    Next
-
-                    '    With DataGridView1.Rows(0)
-                    '        cm.Parameters.AddWithValue("@no_pel", .Cells("no_pel").Value)
-                    '        cm.Parameters.AddWithValue("@jumlah_bulan", jumlah_bulan)
-                    '        cm.Parameters.AddWithValue("@tagihan", tagihan)
-                    '        cm.Parameters.AddWithValue("@created_at", Date.Now.ToString("d/M/yyyy H:m:ss"))
-                    '        cm.Parameters.AddWithValue("@is_paid", False)
-                    '    End With
-
-                    '    cm.ExecuteNonQuery()
-                    '    DataGridView1.Rows.Clear()
-                    '    DataGridView1.Refresh()
-                    '    clear()
-                    '    MsgBox("Success", vbInformation)
-                    '    cn.Close()
-                    'Catch ex As Exception
-                    '    cn.Close()
-                    '    MsgBox(ex.Message.ToString(), vbCritical)
-                    'End Try
-                    'tb_nopel.Text = ""
+                            cm.ExecuteNonQuery()
+                            DataGridView1.Rows.Clear()
+                            DataGridView1.Refresh()
+                            clear()
+                            MsgBox("Success", vbInformation)
+                            cn.Close()
+                        Catch ex As Exception
+                            cn.Close()
+                            MsgBox(ex.Message.ToString(), vbCritical)
+                        End Try
+                        tb_nopel.Text = ""
+                    End If
             End Select
         End If
     End Sub

@@ -138,7 +138,7 @@ Partial Class Riwayat
         Me.btn_laporan.Name = "btn_laporan"
         Me.btn_laporan.Size = New System.Drawing.Size(172, 45)
         Me.btn_laporan.TabIndex = 20
-        Me.btn_laporan.Text = "PRINT LAPORAN"
+        Me.btn_laporan.Text = "BUAT LAPORAN"
         Me.btn_laporan.UseVisualStyleBackColor = False
         '
         'btn_delete
@@ -180,9 +180,6 @@ Partial Class Riwayat
         Me.chk_terbayar.TabIndex = 24
         Me.chk_terbayar.Text = "Tampilkan dengan yg sdh dibayar"
         Me.chk_terbayar.UseVisualStyleBackColor = True
-        '
-        'PrintDocument1
-        '
         '
         'PrintPreviewDialog1
         '

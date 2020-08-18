@@ -161,47 +161,50 @@ Public Class Riwayat
         End If
     End Sub
 
-    Dim mRow As Integer = 0
-    Dim newpage As Boolean = True
-    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-        With DataGridView1
-            Dim fmt As StringFormat = New StringFormat(StringFormatFlags.LineLimit)
-            fmt.LineAlignment = StringAlignment.Center
-            fmt.Trimming = StringTrimming.EllipsisCharacter
-            Dim y As Single = e.MarginBounds.Top
-            Do While mRow < .RowCount
-                Dim row As DataGridViewRow = .Rows(mRow)
-                Dim x As Single = e.MarginBounds.Left
-                Dim h As Single = 0
-                For Each cell As DataGridViewCell In row.Cells
-                    Dim rc As RectangleF = New RectangleF(x, y, cell.Size.Width, cell.Size.Height)
-                    e.Graphics.DrawRectangle(Pens.Black, rc.Left, rc.Top, rc.Width, rc.Height)
-                    If (newpage) Then
-                        e.Graphics.DrawString(DataGridView1.Columns(cell.ColumnIndex).HeaderText, .Font, Brushes.Black, rc, fmt)
-                    Else
-                        e.Graphics.DrawString(DataGridView1.Rows(cell.RowIndex).Cells(cell.ColumnIndex).FormattedValue.ToString(), .Font, Brushes.Black, rc, fmt)
-                    End If
-                    x += rc.Width
-                    h = Math.Max(h, rc.Height)
-                Next
-                newpage = False
-                y += h
-                mRow += 1
-                If y + h > e.MarginBounds.Bottom Then
-                    e.HasMorePages = True
-                    mRow -= 1
-                    newpage = True
-                    Exit Sub
-                End If
-            Loop
-            mRow = 0
-        End With
-    End Sub
+    'Dim mRow As Integer = 0
+    'Dim newpage As Boolean = True
+    'Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+    '    With DataGridView1
+    '        Dim fmt As StringFormat = New StringFormat(StringFormatFlags.LineLimit)
+    '        fmt.LineAlignment = StringAlignment.Center
+    '        fmt.Trimming = StringTrimming.EllipsisCharacter
+    '        Dim y As Single = e.MarginBounds.Top
+    '        Do While mRow < .RowCount
+    '            Dim row As DataGridViewRow = .Rows(mRow)
+    '            Dim x As Single = e.MarginBounds.Left
+    '            Dim h As Single = 0
+    '            For Each cell As DataGridViewCell In row.Cells
+    '                Dim rc As RectangleF = New RectangleF(x, y, cell.Size.Width, cell.Size.Height)
+    '                e.Graphics.DrawRectangle(Pens.Black, rc.Left, rc.Top, rc.Width, rc.Height)
+    '                If (newpage) Then
+    '                    e.Graphics.DrawString(DataGridView1.Columns(cell.ColumnIndex).HeaderText, .Font, Brushes.Black, rc, fmt)
+    '                Else
+    '                    e.Graphics.DrawString(DataGridView1.Rows(cell.RowIndex).Cells(cell.ColumnIndex).FormattedValue.ToString(), .Font, Brushes.Black, rc, fmt)
+    '                End If
+    '                x += rc.Width
+    '                h = Math.Max(h, rc.Height)
+    '            Next
+    '            newpage = False
+    '            y += h
+    '            mRow += 1
+    '            If y + h > e.MarginBounds.Bottom Then
+    '                e.HasMorePages = True
+    '                mRow -= 1
+    '                newpage = True
+    '                Exit Sub
+    '            End If
+    '        Loop
+    '        mRow = 0
+    '    End With
+    'End Sub
 
     Private Sub btn_laporan_Click(sender As Object, e As EventArgs) Handles btn_laporan.Click
-        PrintPreviewDialog1.Document = PrintDocument1
-        PrintPreviewDialog1.ShowDialog()
+        'PrintPreviewDialog1.Document = PrintDocument1
+        'PrintPreviewDialog1.ShowDialog()
+        Laporan.ShowDialog()
     End Sub
 
+    Private Sub Riwayat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

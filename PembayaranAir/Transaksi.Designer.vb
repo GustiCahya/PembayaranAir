@@ -36,12 +36,15 @@ Partial Class Transaksi
         Me.tb_golongan = New System.Windows.Forms.TextBox()
         Me.lbl_bulan = New System.Windows.Forms.Label()
         Me.btn_print = New System.Windows.Forms.Button()
+        Me.chk_hanya_print = New System.Windows.Forms.CheckBox()
+        Me.chk_hanya_add = New System.Windows.Forms.CheckBox()
         Me.no_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nama_pelanggan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stand_meter = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tagihan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idx_bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tahun = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -69,7 +72,7 @@ Partial Class Transaksi
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no_pel, Me.nama_pelanggan, Me.bulan, Me.stand_meter, Me.tagihan, Me.idx_bulan})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no_pel, Me.nama_pelanggan, Me.bulan, Me.stand_meter, Me.tagihan, Me.idx_bulan, Me.tahun})
         Me.DataGridView1.Location = New System.Drawing.Point(-2, 107)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 25
@@ -166,12 +169,32 @@ Partial Class Transaksi
         Me.btn_print.ForeColor = System.Drawing.Color.Snow
         Me.btn_print.Image = CType(resources.GetObject("btn_print.Image"), System.Drawing.Image)
         Me.btn_print.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btn_print.Location = New System.Drawing.Point(400, 51)
+        Me.btn_print.Location = New System.Drawing.Point(400, 47)
         Me.btn_print.Name = "btn_print"
         Me.btn_print.Size = New System.Drawing.Size(110, 35)
         Me.btn_print.TabIndex = 34
         Me.btn_print.Text = "PRINT"
         Me.btn_print.UseVisualStyleBackColor = False
+        '
+        'chk_hanya_print
+        '
+        Me.chk_hanya_print.AutoSize = True
+        Me.chk_hanya_print.Location = New System.Drawing.Point(427, 89)
+        Me.chk_hanya_print.Name = "chk_hanya_print"
+        Me.chk_hanya_print.Size = New System.Drawing.Size(81, 17)
+        Me.chk_hanya_print.TabIndex = 35
+        Me.chk_hanya_print.Text = "Hanya Print"
+        Me.chk_hanya_print.UseVisualStyleBackColor = True
+        '
+        'chk_hanya_add
+        '
+        Me.chk_hanya_add.AutoSize = True
+        Me.chk_hanya_add.Location = New System.Drawing.Point(340, 89)
+        Me.chk_hanya_add.Name = "chk_hanya_add"
+        Me.chk_hanya_add.Size = New System.Drawing.Size(79, 17)
+        Me.chk_hanya_add.TabIndex = 36
+        Me.chk_hanya_add.Text = "Hanya Add"
+        Me.chk_hanya_add.UseVisualStyleBackColor = True
         '
         'no_pel
         '
@@ -211,11 +234,19 @@ Partial Class Transaksi
         Me.idx_bulan.Name = "idx_bulan"
         Me.idx_bulan.Visible = False
         '
+        'tahun
+        '
+        Me.tahun.HeaderText = "tahun"
+        Me.tahun.Name = "tahun"
+        Me.tahun.Visible = False
+        '
         'Transaksi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(522, 314)
+        Me.Controls.Add(Me.chk_hanya_add)
+        Me.Controls.Add(Me.chk_hanya_print)
         Me.Controls.Add(Me.btn_print)
         Me.Controls.Add(Me.lbl_bulan)
         Me.Controls.Add(Me.Label5)
@@ -249,10 +280,13 @@ Partial Class Transaksi
     Friend WithEvents tb_golongan As TextBox
     Friend WithEvents lbl_bulan As Label
     Friend WithEvents btn_print As Button
+    Friend WithEvents chk_hanya_print As CheckBox
+    Friend WithEvents chk_hanya_add As CheckBox
     Friend WithEvents no_pel As DataGridViewTextBoxColumn
     Friend WithEvents nama_pelanggan As DataGridViewTextBoxColumn
     Friend WithEvents bulan As DataGridViewTextBoxColumn
     Friend WithEvents stand_meter As DataGridViewTextBoxColumn
     Friend WithEvents tagihan As DataGridViewTextBoxColumn
     Friend WithEvents idx_bulan As DataGridViewTextBoxColumn
+    Friend WithEvents tahun As DataGridViewTextBoxColumn
 End Class
