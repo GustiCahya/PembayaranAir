@@ -26,6 +26,13 @@ Partial Class Transaksi
         Me.tb_nopel = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.no_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nama_pelanggan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stand_meter = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tagihan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idx_bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tahun = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dtp_tgl = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tb_nama = New System.Windows.Forms.TextBox()
@@ -38,13 +45,6 @@ Partial Class Transaksi
         Me.btn_print = New System.Windows.Forms.Button()
         Me.chk_hanya_print = New System.Windows.Forms.CheckBox()
         Me.chk_hanya_add = New System.Windows.Forms.CheckBox()
-        Me.no_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nama_pelanggan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stand_meter = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tagihan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idx_bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tahun = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -73,11 +73,55 @@ Partial Class Transaksi
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no_pel, Me.nama_pelanggan, Me.bulan, Me.stand_meter, Me.tagihan, Me.idx_bulan, Me.tahun})
-        Me.DataGridView1.Location = New System.Drawing.Point(-2, 107)
+        Me.DataGridView1.Location = New System.Drawing.Point(-4, 107)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 25
-        Me.DataGridView1.Size = New System.Drawing.Size(527, 207)
+        Me.DataGridView1.Size = New System.Drawing.Size(529, 207)
         Me.DataGridView1.TabIndex = 15
+        '
+        'no_pel
+        '
+        Me.no_pel.HeaderText = "No. Pelanggan"
+        Me.no_pel.Name = "no_pel"
+        Me.no_pel.ReadOnly = True
+        Me.no_pel.Width = 90
+        '
+        'nama_pelanggan
+        '
+        Me.nama_pelanggan.HeaderText = "Nama Pelanggan"
+        Me.nama_pelanggan.Name = "nama_pelanggan"
+        Me.nama_pelanggan.ReadOnly = True
+        Me.nama_pelanggan.Width = 140
+        '
+        'bulan
+        '
+        Me.bulan.HeaderText = "Bulan"
+        Me.bulan.Name = "bulan"
+        Me.bulan.ReadOnly = True
+        Me.bulan.Width = 50
+        '
+        'stand_meter
+        '
+        Me.stand_meter.HeaderText = "Stand Meter"
+        Me.stand_meter.Name = "stand_meter"
+        '
+        'tagihan
+        '
+        Me.tagihan.HeaderText = "Tagihan"
+        Me.tagihan.Name = "tagihan"
+        Me.tagihan.Width = 120
+        '
+        'idx_bulan
+        '
+        Me.idx_bulan.HeaderText = "idx_bulan"
+        Me.idx_bulan.Name = "idx_bulan"
+        Me.idx_bulan.Visible = False
+        '
+        'tahun
+        '
+        Me.tahun.HeaderText = "tahun"
+        Me.tahun.Name = "tahun"
+        Me.tahun.Visible = False
         '
         'dtp_tgl
         '
@@ -195,50 +239,6 @@ Partial Class Transaksi
         Me.chk_hanya_add.TabIndex = 36
         Me.chk_hanya_add.Text = "Hanya Add"
         Me.chk_hanya_add.UseVisualStyleBackColor = True
-        '
-        'no_pel
-        '
-        Me.no_pel.HeaderText = "No. Pelanggan"
-        Me.no_pel.Name = "no_pel"
-        Me.no_pel.ReadOnly = True
-        Me.no_pel.Width = 90
-        '
-        'nama_pelanggan
-        '
-        Me.nama_pelanggan.HeaderText = "Nama Pelanggan"
-        Me.nama_pelanggan.Name = "nama_pelanggan"
-        Me.nama_pelanggan.ReadOnly = True
-        Me.nama_pelanggan.Width = 140
-        '
-        'bulan
-        '
-        Me.bulan.HeaderText = "Bulan"
-        Me.bulan.Name = "bulan"
-        Me.bulan.ReadOnly = True
-        Me.bulan.Width = 50
-        '
-        'stand_meter
-        '
-        Me.stand_meter.HeaderText = "Stand Meter"
-        Me.stand_meter.Name = "stand_meter"
-        '
-        'tagihan
-        '
-        Me.tagihan.HeaderText = "Tagihan"
-        Me.tagihan.Name = "tagihan"
-        Me.tagihan.Width = 120
-        '
-        'idx_bulan
-        '
-        Me.idx_bulan.HeaderText = "idx_bulan"
-        Me.idx_bulan.Name = "idx_bulan"
-        Me.idx_bulan.Visible = False
-        '
-        'tahun
-        '
-        Me.tahun.HeaderText = "tahun"
-        Me.tahun.Name = "tahun"
-        Me.tahun.Visible = False
         '
         'Transaksi
         '

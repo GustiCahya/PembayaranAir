@@ -208,11 +208,16 @@ Public Class Printer
         PrintDatalist = New PrintDatalist
         _myfont = New Font("Courier New", 8, FontStyle.Regular, GraphicsUnit.Point) 'Default
         prn = New Printing.PrintDocument
+        Dim aCustomSize As New PaperSize("Struk", 850, 280)
         row = 0
 
         Dim PS1 As New System.Drawing.Printing.PageSettings
         With PS1
-            .PaperSize = (From s As PaperSize In prn.PrinterSettings.PaperSizes.Cast(Of PaperSize)()).FirstOrDefault
+            'Console.WriteLine((From s As PaperSize In prn.PrinterSettings.PaperSizes.Cast(Of PaperSize)()).FirstOrDefault)
+            'Console.WriteLine(aCustomSize)
+            '.PaperSize = (From s As PaperSize In prn.PrinterSettings.PaperSizes.Cast(Of PaperSize)()).FirstOrDefault
+            .PaperSize = aCustomSize
+            .Landscape = True
             .Margins.Left = 0
             .Margins.Right = 0
             .Margins.Top = 0

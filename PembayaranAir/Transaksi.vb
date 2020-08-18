@@ -151,32 +151,32 @@ Public Class Transaksi
                 'Left Side
                 ItemRow("leftSide") = vbCrLf
                 ItemRow("leftSide") &= vbCrLf
-                ItemRow("leftSide") &= "     " & "UD. CAHYA UTAMA" & vbCrLf
-                ItemRow("leftSide") &= "     " & "==========================" & vbCrLf
-                ItemRow("leftSide") &= "     " & "TGL. BAYAR : " & sekarang & vbCrLf
-                ItemRow("leftSide") &= "     " & "NO PEL     : " & nopel & vbCrLf
-                ItemRow("leftSide") &= "     " & "NAMA       : " & nama & vbCrLf
-                ItemRow("leftSide") &= "     " & "ALT        : " & alamat & vbCrLf
-                ItemRow("leftSide") &= "     " & "BLN. REK   : " & bulan & " " & tahun & vbCrLf
-                ItemRow("leftSide") &= "     " & "GOL.       : " & golongan & vbCrLf
-                ItemRow("leftSide") &= "     " & "STND MTR   : " & stand_meter & vbCrLf
-                ItemRow("leftSide") &= "     " & "TAG        : Rp.   " & f_tagihan & vbCrLf
+                ItemRow("leftSide") &= "   " & "UD. CAHYA UTAMA" & vbCrLf
+                ItemRow("leftSide") &= "   " & "==========================" & vbCrLf
+                ItemRow("leftSide") &= "   " & "TGL. BAYAR : " & sekarang & vbCrLf
+                ItemRow("leftSide") &= "   " & "NO PEL     : " & nopel & vbCrLf
+                ItemRow("leftSide") &= "   " & "NAMA       : " & nama & vbCrLf
+                ItemRow("leftSide") &= "   " & "ALT        : " & alamat & vbCrLf
+                ItemRow("leftSide") &= "   " & "BLN. REK   : " & bulan & " " & tahun & vbCrLf
+                ItemRow("leftSide") &= "   " & "GOL.       : " & golongan & vbCrLf
+                ItemRow("leftSide") &= "   " & "STND MTR   : " & stand_meter & vbCrLf
+                ItemRow("leftSide") &= "   " & "TAG        : Rp.   " & f_tagihan & vbCrLf
                 If tagihan >= 100000 Then
-                    ItemRow("leftSide") &= "     " & "ADMIN      : Rp.     " & f_admin & vbCrLf
+                    ItemRow("leftSide") &= "   " & "ADMIN      : Rp.     " & f_admin & vbCrLf
                 Else
-                    ItemRow("leftSide") &= "     " & "ADMIN      : Rp.    " & f_admin & vbCrLf
+                    ItemRow("leftSide") &= "   " & "ADMIN      : Rp.    " & f_admin & vbCrLf
                 End If
 
-                ItemRow("leftSide") &= "     " & "TOTAL      : Rp.   " & f_total & vbCrLf
+                ItemRow("leftSide") &= "   " & "TOTAL      : Rp.   " & f_total & vbCrLf
 
 
                 'Right Side
                 ItemRow("rightSide") = vbCrLf
                 ItemRow("rightSide") &= vbCrLf
                 ItemRow("rightSide") &= "TANDA TERIMA PEMBAYARAN REKENING PDAM MATARAM" & vbCrLf
-                ItemRow("rightSide") &= "=======================================================================" & vbCrLf
-                ItemRow("rightSide") &= "BLN. REK     : " & bulan & " " & tahun & "                       " & "TGL. BAYAR  : " & sekarang & vbCrLf
-                ItemRow("rightSide") &= "NO. SAMB     : " & nopel & "        " & "Gol.: " & golongan & "      " & "STND MTR    : " & stand_meter & vbCrLf
+                ItemRow("rightSide") &= "=================================================================" & vbCrLf
+                ItemRow("rightSide") &= "BLN. REK     : " & bulan & " " & tahun & "               " & "TGL. BAYAR  : " & sekarang & vbCrLf
+                ItemRow("rightSide") &= "NO. SAMB     : " & nopel & "   " & "Gol.: " & golongan & "   " & "STND MTR    : " & stand_meter & vbCrLf
                 ItemRow("rightSide") &= "NAMA         : " & nama & vbCrLf
                 ItemRow("rightSide") &= "ALAMAT       : " & alamat & vbCrLf
                 ItemRow("rightSide") &= "TAGIHAN PDAM : Rp.          " & f_tagihan & vbCrLf
@@ -202,19 +202,24 @@ Public Class Transaksi
                 Case MsgBoxResult.Yes
 
                     If chk_hanya_add.Checked <> True Then
-                        Data_Load()
-                        Printer.NewPrint()
 
-                        Dim c As New PrintingFormat
-                        Dim arrWidth() As Integer = {265, 529}
-                        Dim arrFormat() As StringFormat = {c.MidLeft, c.MidLeft}
+                        For i = 0 To DataGridView1.RowCount - 2
+                            Printer.NewPrint()
 
-                        'looping item sales | loop item penjualan
-                        For r = 0 To dtItem.Rows.Count - 1
-                            Printer.Print(dtItem.Rows(r).Item("leftSide") & ";" &
-                          dtItem.Rows(r).Item("rightSide") & ";", arrWidth, arrFormat)
+                            Data_Load()
+                            Dim c As New PrintingFormat
+                            Dim arrWidth() As Integer = {280, 514}
+                            Dim arrFormat() As StringFormat = {c.MidLeft, c.MidLeft}
+
+                            Printer.SetFont("Courier New", 9, FontStyle.Regular)
+                            Printer.Print(vbCrLf)
+                            Printer.Print(dtItem.Rows(i).Item("leftSide") & ";" &
+                            dtItem.Rows(i).Item("rightSide") & ";", arrWidth, arrFormat)
+
+                            Printer.DoPrint()
                         Next
-                        Printer.DoPrint()
+
+
                         If chk_hanya_print.Checked = True Then
                             DataGridView1.Rows.Clear()
                             DataGridView1.Refresh()
