@@ -1986,26 +1986,42 @@ Namespace dbAirDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_No_Trx As Integer, ByVal Original_No_Pel As String, ByVal Original_Jumlah_Bulan As Integer, ByVal Original_Tagihan As Integer, ByVal Original_Created_At As String, ByVal Original_Is_Paid As Boolean) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_No_Trx As Integer, ByVal Original_No_Pel As String, ByVal Original_Jumlah_Bulan As Global.System.Nullable(Of Integer), ByVal Original_Tagihan As Global.System.Nullable(Of Integer), ByVal Original_Created_At As String, ByVal Original_Is_Paid As Global.System.Nullable(Of Boolean)) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_No_Trx,Integer)
             If (Original_No_Pel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_No_Pel")
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_No_Pel,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Jumlah_Bulan,Integer)
-            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-            Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Tagihan,Integer)
+            If (Original_Jumlah_Bulan.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Jumlah_Bulan.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Tagihan.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Tagihan.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
             If (Original_Created_At Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Created_At")
             Else
                 Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Created_At,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-            Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Is_Paid,Boolean)
+            If (Original_Is_Paid.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Is_Paid.Value,Boolean)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -2025,20 +2041,32 @@ Namespace dbAirDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal No_Pel As String, ByVal Jumlah_Bulan As Integer, ByVal Tagihan As Integer, ByVal Created_At As String, ByVal Is_Paid As Boolean) As Integer
+        Public Overloads Overridable Function Insert(ByVal No_Pel As String, ByVal Jumlah_Bulan As Global.System.Nullable(Of Integer), ByVal Tagihan As Global.System.Nullable(Of Integer), ByVal Created_At As String, ByVal Is_Paid As Global.System.Nullable(Of Boolean)) As Integer
             If (No_Pel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("No_Pel")
+                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(No_Pel,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(Jumlah_Bulan,Integer)
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(Tagihan,Integer)
+            If (Jumlah_Bulan.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Jumlah_Bulan.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Tagihan.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Tagihan.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
             If (Created_At Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Created_At")
             Else
                 Me.Adapter.InsertCommand.Parameters(3).Value = CType(Created_At,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(Is_Paid,Boolean)
+            If (Is_Paid.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Is_Paid.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -2058,39 +2086,67 @@ Namespace dbAirDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal No_Pel As String, ByVal Jumlah_Bulan As Integer, ByVal Tagihan As Integer, ByVal Created_At As String, ByVal Is_Paid As Boolean, ByVal Original_No_Trx As Integer, ByVal Original_No_Pel As String, ByVal Original_Jumlah_Bulan As Integer, ByVal Original_Tagihan As Integer, ByVal Original_Created_At As String, ByVal Original_Is_Paid As Boolean) As Integer
+        Public Overloads Overridable Function Update(ByVal No_Pel As String, ByVal Jumlah_Bulan As Global.System.Nullable(Of Integer), ByVal Tagihan As Global.System.Nullable(Of Integer), ByVal Created_At As String, ByVal Is_Paid As Global.System.Nullable(Of Boolean), ByVal Original_No_Trx As Integer, ByVal Original_No_Pel As String, ByVal Original_Jumlah_Bulan As Global.System.Nullable(Of Integer), ByVal Original_Tagihan As Global.System.Nullable(Of Integer), ByVal Original_Created_At As String, ByVal Original_Is_Paid As Global.System.Nullable(Of Boolean)) As Integer
             If (No_Pel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("No_Pel")
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(No_Pel,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Jumlah_Bulan,Integer)
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Tagihan,Integer)
+            If (Jumlah_Bulan.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Jumlah_Bulan.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Tagihan.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Tagihan.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
             If (Created_At Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Created_At")
             Else
                 Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Created_At,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Is_Paid,Boolean)
+            If (Is_Paid.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Is_Paid.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
             Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_No_Trx,Integer)
             If (Original_No_Pel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_No_Pel")
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_No_Pel,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_Jumlah_Bulan,Integer)
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Tagihan,Integer)
+            If (Original_Jumlah_Bulan.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_Jumlah_Bulan.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Tagihan.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Tagihan.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+            End If
             If (Original_Created_At Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Created_At")
             Else
                 Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_Created_At,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Is_Paid,Boolean)
+            If (Original_Is_Paid.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Is_Paid.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then

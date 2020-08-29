@@ -24,6 +24,7 @@ Partial Class PageAdmin
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PageAdmin))
         Me.PanelMenu = New System.Windows.Forms.Panel()
+        Me.btn_antrian = New System.Windows.Forms.Button()
         Me.btn_pelanggan = New System.Windows.Forms.Button()
         Me.btn_history = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -40,6 +41,7 @@ Partial Class PageAdmin
         Me.PanelMenu.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.PanelMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(36, Byte), Integer), CType(CType(41, Byte), Integer))
+        Me.PanelMenu.Controls.Add(Me.btn_antrian)
         Me.PanelMenu.Controls.Add(Me.btn_pelanggan)
         Me.PanelMenu.Controls.Add(Me.btn_history)
         Me.PanelMenu.Controls.Add(Me.PictureBox1)
@@ -49,6 +51,22 @@ Partial Class PageAdmin
         Me.PanelMenu.Size = New System.Drawing.Size(160, 414)
         Me.PanelMenu.TabIndex = 0
         '
+        'btn_antrian
+        '
+        Me.btn_antrian.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(36, Byte), Integer), CType(CType(41, Byte), Integer))
+        Me.btn_antrian.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btn_antrian.FlatAppearance.BorderSize = 0
+        Me.btn_antrian.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_antrian.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.btn_antrian.ForeColor = System.Drawing.Color.White
+        Me.btn_antrian.Location = New System.Drawing.Point(3, 255)
+        Me.btn_antrian.Margin = New System.Windows.Forms.Padding(0)
+        Me.btn_antrian.Name = "btn_antrian"
+        Me.btn_antrian.Size = New System.Drawing.Size(160, 51)
+        Me.btn_antrian.TabIndex = 3
+        Me.btn_antrian.Text = "Antrian"
+        Me.btn_antrian.UseVisualStyleBackColor = False
+        '
         'btn_pelanggan
         '
         Me.btn_pelanggan.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(36, Byte), Integer), CType(CType(41, Byte), Integer))
@@ -57,7 +75,7 @@ Partial Class PageAdmin
         Me.btn_pelanggan.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_pelanggan.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
         Me.btn_pelanggan.ForeColor = System.Drawing.Color.White
-        Me.btn_pelanggan.Location = New System.Drawing.Point(0, 205)
+        Me.btn_pelanggan.Location = New System.Drawing.Point(3, 205)
         Me.btn_pelanggan.Margin = New System.Windows.Forms.Padding(0)
         Me.btn_pelanggan.Name = "btn_pelanggan"
         Me.btn_pelanggan.Size = New System.Drawing.Size(160, 50)
@@ -73,7 +91,7 @@ Partial Class PageAdmin
         Me.btn_history.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_history.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
         Me.btn_history.ForeColor = System.Drawing.Color.White
-        Me.btn_history.Location = New System.Drawing.Point(0, 154)
+        Me.btn_history.Location = New System.Drawing.Point(3, 154)
         Me.btn_history.Margin = New System.Windows.Forms.Padding(0)
         Me.btn_history.Name = "btn_history"
         Me.btn_history.Size = New System.Drawing.Size(160, 51)
@@ -163,4 +181,5 @@ Partial Class PageAdmin
     Friend WithEvents PanelShow As Panel
     Friend WithEvents lbl_title As Label
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents btn_antrian As Button
 End Class

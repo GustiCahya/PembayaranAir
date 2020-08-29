@@ -1,6 +1,6 @@
 ﻿Public Class PageAdmin
     Public title As String
-    Private Sub FormPanel(ByVal CurrentForm As Object)
+    Public Sub FormPanel(ByVal CurrentForm As Object)
         If Me.PanelShow.Controls.Count > 0 Then
             Me.PanelShow.Controls.RemoveAt(0)
         End If
@@ -33,5 +33,11 @@
         FormPanel(pelanggan)
         pelanggan.DataGridView1.DataSource = vbNull
         pelanggan.LoadTable()
+    End Sub
+    Private Sub btn_antrian_Click(sender As Object, e As EventArgs) Handles btn_antrian.Click
+        title = "Antrian"
+        FormPanel(Antrian)
+        Antrian.DataGridView1.Rows.Clear()
+        Antrian.LoadTable()
     End Sub
 End Class

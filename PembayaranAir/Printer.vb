@@ -217,7 +217,6 @@ Public Class Printer
             'Console.WriteLine(aCustomSize)
             '.PaperSize = (From s As PaperSize In prn.PrinterSettings.PaperSizes.Cast(Of PaperSize)()).FirstOrDefault
             .PaperSize = aCustomSize
-            .Landscape = True
             .Margins.Left = 0
             .Margins.Right = 0
             .Margins.Top = 0

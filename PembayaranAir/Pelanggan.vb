@@ -125,7 +125,7 @@ Public Class pelanggan
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        If e.RowIndex >= 0 Then
+        If e.RowIndex > -1 Then
             With DataGridView1
                 tb_nopel.Text = .Item(0, e.RowIndex).Value
                 tb_nama.Text = .Item(1, e.RowIndex).Value
@@ -192,5 +192,4 @@ Public Class pelanggan
     Private Sub pelanggan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
-
 End Class
