@@ -24,15 +24,6 @@ Partial Class Antrian
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Antrian))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.no_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nama_pelanggan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stand_meter = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tagihan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idx = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tahun = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.alamat_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.gol_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tb_nopel = New System.Windows.Forms.TextBox()
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -42,6 +33,16 @@ Partial Class Antrian
         Me.chk_hanya_print = New System.Windows.Forms.CheckBox()
         Me.btn_print = New System.Windows.Forms.Button()
         Me.btn_delete = New System.Windows.Forms.Button()
+        Me.no_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nama_pelanggan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bulan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stand_meter = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tagihan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idx = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tahun = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.alamat_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.gol_pel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.created_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,74 +56,13 @@ Partial Class Antrian
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no_pel, Me.nama_pelanggan, Me.bulan, Me.stand_meter, Me.tagihan, Me.idx, Me.tahun, Me.alamat_pel, Me.gol_pel})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.no_pel, Me.nama_pelanggan, Me.bulan, Me.stand_meter, Me.tagihan, Me.idx, Me.tahun, Me.alamat_pel, Me.gol_pel, Me.created_at})
         Me.DataGridView1.Location = New System.Drawing.Point(-3, 80)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.Size = New System.Drawing.Size(529, 234)
         Me.DataGridView1.TabIndex = 16
-        '
-        'no_pel
-        '
-        Me.no_pel.HeaderText = "No. Pelanggan"
-        Me.no_pel.Name = "no_pel"
-        Me.no_pel.ReadOnly = True
-        Me.no_pel.Width = 90
-        '
-        'nama_pelanggan
-        '
-        Me.nama_pelanggan.HeaderText = "Nama Pelanggan"
-        Me.nama_pelanggan.Name = "nama_pelanggan"
-        Me.nama_pelanggan.ReadOnly = True
-        Me.nama_pelanggan.Width = 140
-        '
-        'bulan
-        '
-        Me.bulan.HeaderText = "Bulan"
-        Me.bulan.Name = "bulan"
-        Me.bulan.ReadOnly = True
-        Me.bulan.Width = 50
-        '
-        'stand_meter
-        '
-        Me.stand_meter.HeaderText = "Stand Meter"
-        Me.stand_meter.Name = "stand_meter"
-        Me.stand_meter.ReadOnly = True
-        '
-        'tagihan
-        '
-        Me.tagihan.HeaderText = "Tagihan"
-        Me.tagihan.Name = "tagihan"
-        Me.tagihan.ReadOnly = True
-        Me.tagihan.Width = 120
-        '
-        'idx
-        '
-        Me.idx.HeaderText = "idx"
-        Me.idx.Name = "idx"
-        Me.idx.ReadOnly = True
-        Me.idx.Visible = False
-        '
-        'tahun
-        '
-        Me.tahun.HeaderText = "Tahun"
-        Me.tahun.Name = "tahun"
-        Me.tahun.ReadOnly = True
-        '
-        'alamat_pel
-        '
-        Me.alamat_pel.HeaderText = "alamat_pel"
-        Me.alamat_pel.Name = "alamat_pel"
-        Me.alamat_pel.ReadOnly = True
-        Me.alamat_pel.Visible = False
-        '
-        'gol_pel
-        '
-        Me.gol_pel.HeaderText = "gol_pel"
-        Me.gol_pel.Name = "gol_pel"
-        Me.gol_pel.ReadOnly = True
-        Me.gol_pel.Visible = False
         '
         'tb_nopel
         '
@@ -218,6 +158,74 @@ Partial Class Antrian
         Me.btn_delete.Text = "Delete"
         Me.btn_delete.UseVisualStyleBackColor = False
         '
+        'no_pel
+        '
+        Me.no_pel.HeaderText = "No. Pelanggan"
+        Me.no_pel.Name = "no_pel"
+        Me.no_pel.ReadOnly = True
+        Me.no_pel.Width = 90
+        '
+        'nama_pelanggan
+        '
+        Me.nama_pelanggan.HeaderText = "Nama Pelanggan"
+        Me.nama_pelanggan.Name = "nama_pelanggan"
+        Me.nama_pelanggan.ReadOnly = True
+        Me.nama_pelanggan.Width = 140
+        '
+        'bulan
+        '
+        Me.bulan.HeaderText = "Bulan"
+        Me.bulan.Name = "bulan"
+        Me.bulan.ReadOnly = True
+        Me.bulan.Width = 50
+        '
+        'stand_meter
+        '
+        Me.stand_meter.HeaderText = "Stand Meter"
+        Me.stand_meter.Name = "stand_meter"
+        Me.stand_meter.ReadOnly = True
+        '
+        'tagihan
+        '
+        Me.tagihan.HeaderText = "Tagihan"
+        Me.tagihan.Name = "tagihan"
+        Me.tagihan.ReadOnly = True
+        Me.tagihan.Width = 120
+        '
+        'idx
+        '
+        Me.idx.HeaderText = "idx"
+        Me.idx.Name = "idx"
+        Me.idx.ReadOnly = True
+        Me.idx.Visible = False
+        '
+        'tahun
+        '
+        Me.tahun.HeaderText = "Tahun"
+        Me.tahun.Name = "tahun"
+        Me.tahun.ReadOnly = True
+        Me.tahun.Visible = False
+        '
+        'alamat_pel
+        '
+        Me.alamat_pel.HeaderText = "alamat_pel"
+        Me.alamat_pel.Name = "alamat_pel"
+        Me.alamat_pel.ReadOnly = True
+        Me.alamat_pel.Visible = False
+        '
+        'gol_pel
+        '
+        Me.gol_pel.HeaderText = "gol_pel"
+        Me.gol_pel.Name = "gol_pel"
+        Me.gol_pel.ReadOnly = True
+        Me.gol_pel.Visible = False
+        '
+        'created_at
+        '
+        Me.created_at.HeaderText = "Tanggal Dibuat"
+        Me.created_at.Name = "created_at"
+        Me.created_at.ReadOnly = True
+        '
         'Antrian
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -247,6 +255,10 @@ Partial Class Antrian
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents chk_hanya_add As CheckBox
+    Friend WithEvents chk_hanya_print As CheckBox
+    Friend WithEvents btn_print As Button
+    Friend WithEvents btn_delete As Button
     Friend WithEvents no_pel As DataGridViewTextBoxColumn
     Friend WithEvents nama_pelanggan As DataGridViewTextBoxColumn
     Friend WithEvents bulan As DataGridViewTextBoxColumn
@@ -256,8 +268,5 @@ Partial Class Antrian
     Friend WithEvents tahun As DataGridViewTextBoxColumn
     Friend WithEvents alamat_pel As DataGridViewTextBoxColumn
     Friend WithEvents gol_pel As DataGridViewTextBoxColumn
-    Friend WithEvents chk_hanya_add As CheckBox
-    Friend WithEvents chk_hanya_print As CheckBox
-    Friend WithEvents btn_print As Button
-    Friend WithEvents btn_delete As Button
+    Friend WithEvents created_at As DataGridViewTextBoxColumn
 End Class

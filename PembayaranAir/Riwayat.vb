@@ -5,8 +5,8 @@ Public Class Riwayat
     Private cnString As String = ConfigurationManager.ConnectionStrings("dbx").ConnectionString()
     Private cn As New OleDbConnection(cnString)
 
-    Private start_date As Date
-    Private end_date As Date
+    Private start_date As String
+    Private end_date As String
     Private currentTrx As String
 
     Public Sub New()
@@ -25,19 +25,33 @@ Public Class Riwayat
 
     End Sub
 
-    Public Sub LoadTable()
+    Public Sub LoadTable(ByVal Optional sekarang As String = "")
         DataGridView1.Rows.Clear()
         DataGridView1.Refresh()
         lbl_no.Text = "No."
         currentTrx = ""
         Try
             cn.Open()
-            Dim cm As New OleDbCommand("SELECT tagihan.no_pel, pelanggan.nama_pel, tagihan.jumlah_bulan, tagihan.tagihan, 
+
+            Dim cm As OleDbCommand
+
+            If String.IsNullOrEmpty(sekarang) Then
+                cm = New OleDbCommand("SELECT tagihan.no_pel, pelanggan.nama_pel, tagihan.jumlah_bulan, tagihan.tagihan, 
                                         tagihan.created_at, tagihan.no_trx, tagihan.is_paid 
                                         FROM tagihan INNER JOIN pelanggan ON tagihan.no_pel=pelanggan.no_pel 
                                         WHERE tagihan.created_at BETWEEN @start_date AND @end_date", cn)
-            cm.Parameters.AddWithValue("@start_date", start_date)
-            cm.Parameters.AddWithValue("@end_date", end_date)
+                cm.Parameters.AddWithValue("@start_date", start_date)
+                cm.Parameters.AddWithValue("@end_date", end_date)
+            Else
+                cm = New OleDbCommand("SELECT tagihan.no_pel, pelanggan.nama_pel, tagihan.jumlah_bulan, tagihan.tagihan, 
+                                        tagihan.created_at, tagihan.no_trx, tagihan.is_paid 
+                                        FROM tagihan INNER JOIN pelanggan ON tagihan.no_pel=pelanggan.no_pel 
+                                        WHERE tagihan.created_at LIKE @now", cn)
+                cm.Parameters.AddWithValue("@now", "%" & sekarang & "%")
+                start_date = sekarang & " 00:00:00 AM"
+                end_date = sekarang & "  00:00:00 PM"
+            End If
+
             Dim dt As New DataTable()
             dt.Load(cm.ExecuteReader())
 
@@ -65,49 +79,65 @@ Public Class Riwayat
         End Try
     End Sub
 
+    Public Sub LoadTableNow()
+
+        Dim sekarang As DateTime = Date.Now.ToString("MM/dd/yyyy")
+        MonthCalendar1.SetDate(sekarang)
+        LoadTable(sekarang)
+
+    End Sub
+
     Private Sub btn_dibayar_Click(sender As Object, e As EventArgs) Handles btn_dibayar.Click
-        If DataGridView1.Rows.Count > 0 Then
-            Select Case MsgBox("Yakin Sudah Dibayar di PDAM?", MsgBoxStyle.YesNo + vbQuestion)
-                Case MsgBoxResult.Yes
-                    Try
-                        cn.Open()
-                        Dim cm = New OleDbCommand("UPDATE Tagihan SET Is_Paid=@is_paid 
+        If Not String.IsNullOrEmpty(start_date) Then
+            If DataGridView1.Rows.Count > 0 Then
+                Select Case MsgBox("Yakin Sudah Dibayar di PDAM?", MsgBoxStyle.YesNo + vbQuestion)
+                    Case MsgBoxResult.Yes
+                        Try
+                            cn.Open()
+                            Dim cm = New OleDbCommand("UPDATE Tagihan SET Is_Paid=@is_paid 
                                                    WHERE Created_At BETWEEN @start_date AND @end_date", cn)
-                        cm.Parameters.AddWithValue("@is_paid", True)
-                        cm.Parameters.AddWithValue("@start_date", start_date)
-                        cm.Parameters.AddWithValue("@end_date", end_date)
-                        cm.ExecuteNonQuery()
-                        cn.Close()
-                        DataGridView1.Rows.Clear()
-                        LoadTable()
-                    Catch ex As Exception
-                        cn.Close()
-                        MsgBox(ex.Message.ToString(), vbCritical)
-                    End Try
-            End Select
+                            cm.Parameters.AddWithValue("@is_paid", True)
+                            cm.Parameters.AddWithValue("@start_date", start_date)
+                            cm.Parameters.AddWithValue("@end_date", end_date)
+                            cm.ExecuteNonQuery()
+                            cn.Close()
+                            DataGridView1.Rows.Clear()
+                            LoadTable()
+                        Catch ex As Exception
+                            cn.Close()
+                            MsgBox(ex.Message.ToString(), vbCritical)
+                        End Try
+                End Select
+            End If
+        Else
+            MsgBox("Harap untuk pilih tanggal-nya terlebih dahulu...", vbInformation)
         End If
     End Sub
 
     Private Sub btn_tidak_Click(sender As Object, e As EventArgs) Handles btn_tidak.Click
-        If DataGridView1.Rows.Count > 0 Then
-            Select Case MsgBox("Yakin Tidak Terbayar?", MsgBoxStyle.YesNo + vbQuestion)
-                Case MsgBoxResult.Yes
-                    Try
-                        cn.Open()
-                        Dim cm = New OleDbCommand("UPDATE Tagihan SET Is_Paid=@is_paid 
+        If Not String.IsNullOrEmpty(start_date) Then
+            If DataGridView1.Rows.Count > 0 Then
+                Select Case MsgBox("Yakin Tidak Terbayar?", MsgBoxStyle.YesNo + vbQuestion)
+                    Case MsgBoxResult.Yes
+                        Try
+                            cn.Open()
+                            Dim cm = New OleDbCommand("UPDATE Tagihan SET Is_Paid=@is_paid 
                                                    WHERE Created_At BETWEEN @start_date AND @end_date", cn)
-                        cm.Parameters.AddWithValue("@is_paid", False)
-                        cm.Parameters.AddWithValue("@start_date", start_date)
-                        cm.Parameters.AddWithValue("@end_date", end_date)
-                        cm.ExecuteNonQuery()
-                        cn.Close()
-                        DataGridView1.Rows.Clear()
-                        LoadTable()
-                    Catch ex As Exception
-                        cn.Close()
-                        MsgBox(ex.Message.ToString(), vbCritical)
-                    End Try
-            End Select
+                            cm.Parameters.AddWithValue("@is_paid", False)
+                            cm.Parameters.AddWithValue("@start_date", start_date)
+                            cm.Parameters.AddWithValue("@end_date", end_date)
+                            cm.ExecuteNonQuery()
+                            cn.Close()
+                            DataGridView1.Rows.Clear()
+                            LoadTable()
+                        Catch ex As Exception
+                            cn.Close()
+                            MsgBox(ex.Message.ToString(), vbCritical)
+                        End Try
+                End Select
+            End If
+        Else
+            MsgBox("Harap untuk pilih tanggal-nya terlebih dahulu...", vbInformation)
         End If
     End Sub
 

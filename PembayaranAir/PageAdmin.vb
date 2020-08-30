@@ -25,8 +25,7 @@
     Private Sub btn_history_Click(sender As Object, e As EventArgs) Handles btn_history.Click
         title = "Riwayat"
         FormPanel(Riwayat)
-        Riwayat.DataGridView1.Rows.Clear()
-        Riwayat.LoadTable()
+        Riwayat.LoadTableNow()
     End Sub
     Private Sub btn_pelanggan_Click(sender As Object, e As EventArgs) Handles btn_pelanggan.Click
         title = "Pelanggan"
@@ -37,7 +36,6 @@
     Private Sub btn_antrian_Click(sender As Object, e As EventArgs) Handles btn_antrian.Click
         title = "Antrian"
         FormPanel(Antrian)
-        Antrian.DataGridView1.Rows.Clear()
         Antrian.LoadTable()
     End Sub
 End Class

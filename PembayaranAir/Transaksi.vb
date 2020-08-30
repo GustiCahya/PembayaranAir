@@ -212,9 +212,9 @@ Public Class Transaksi
                             clear()
                             MsgBox("Success", vbInformation)
                             cn.Close()
+                            PageAdmin.title = "Riwayat"
                             PageAdmin.FormPanel(Riwayat)
-                            Riwayat.DataGridView1.Rows.Clear()
-                            Riwayat.LoadTable()
+                            Riwayat.LoadTableNow()
                         Catch ex As Exception
                             cn.Close()
                             MsgBox(ex.Message.ToString(), vbCritical)
@@ -258,29 +258,37 @@ Public Class Transaksi
     End Sub
 
     Private Sub btn_taruh_antrian_Click(sender As Object, e As EventArgs) Handles btn_taruh_antrian.Click
-        Try
-            cn.Open()
-            For i = 0 To DataGridView1.RowCount - 2
-                With DataGridView1.Rows(i)
-                    Dim cm = New OleDbCommand("INSERT INTO Antrian (no_pel, bulan, stand_meter, tagihan, tahun, created_at) VALUES (@no_pel, @bulan, @stand_meter, @tagihan, @tahun, @created_at)", cn)
-                    cm.Parameters.AddWithValue("@no_pel", .Cells("no_pel").Value)
-                    cm.Parameters.AddWithValue("@bulan", .Cells("bulan").Value)
-                    cm.Parameters.AddWithValue("@stand_meter", .Cells("stand_meter").Value)
-                    cm.Parameters.AddWithValue("@tagihan", .Cells("tagihan").Value)
-                    cm.Parameters.AddWithValue("@tahun", .Cells("tahun").Value)
-                    cm.Parameters.AddWithValue("@created_at", Date.Now.ToString())
-                    cm.ExecuteNonQuery()
-                End With
-            Next
-            MsgBox("Transaksi BERHASIL Dimasukkan ke Antrian")
-            DataGridView1.Rows.Clear()
-            clear()
-            cn.Close()
-            tb_nopel.Text = ""
-        Catch ex As Exception
-            cn.Close()
-            MsgBox(ex.Message.ToString(), vbCritical)
-        End Try
+        Select Case MsgBox("Yakin Mau dimasukkan Antrian?", MsgBoxStyle.YesNo + vbQuestion)
+            Case MsgBoxResult.Yes
+                Try
+                    cn.Open()
+                    For i = 0 To DataGridView1.RowCount - 2
+                        With DataGridView1.Rows(i)
+                            Dim cm = New OleDbCommand("INSERT INTO Antrian (no_pel, bulan, stand_meter, tagihan, tahun, created_at) VALUES (@no_pel, @bulan, @stand_meter, @tagihan, @tahun, @created_at)", cn)
+                            cm.Parameters.AddWithValue("@no_pel", .Cells("no_pel").Value)
+                            cm.Parameters.AddWithValue("@bulan", .Cells("bulan").Value)
+                            cm.Parameters.AddWithValue("@stand_meter", .Cells("stand_meter").Value)
+                            cm.Parameters.AddWithValue("@tagihan", .Cells("tagihan").Value)
+                            cm.Parameters.AddWithValue("@tahun", .Cells("tahun").Value)
+                            cm.Parameters.AddWithValue("@created_at", Date.Now.ToString())
+                            cm.ExecuteNonQuery()
+                        End With
+                    Next
+
+                    MsgBox("BERHASIL!!!", vbInformation)
+                    PageAdmin.title = "Antrian"
+                    PageAdmin.FormPanel(Antrian)
+                    Antrian.LoadTable()
+
+                    DataGridView1.Rows.Clear()
+                    clear()
+                    cn.Close()
+                    tb_nopel.Text = ""
+                Catch ex As Exception
+                    cn.Close()
+                    MsgBox(ex.Message.ToString(), vbCritical)
+                End Try
+        End Select
     End Sub
 
 End Class

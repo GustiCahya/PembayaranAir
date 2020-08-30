@@ -18,7 +18,7 @@ Public Class Antrian
         Try
             cn.Open()
             Dim cm = New OleDbCommand("SELECT Antrian.No_Pel, Pelanggan.Nama_Pel, Antrian.Bulan, Antrian.Stand_Meter, Antrian.Tagihan, 
-                                       Antrian.No, Antrian.Tahun, Pelanggan.Alamat, Pelanggan.Golongan FROM Antrian 
+                                       Antrian.No, Antrian.Tahun, Pelanggan.Alamat, Pelanggan.Golongan, Antrian.Created_At FROM Antrian 
                                        INNER JOIN Pelanggan ON Antrian.No_Pel = Pelanggan.No_Pel", cn)
             Dim dt As New DataTable()
             dt.Load(cm.ExecuteReader())
@@ -34,6 +34,7 @@ Public Class Antrian
                     .Rows(i).Cells("tahun").Value = dt.Rows(i).Item(6)
                     .Rows(i).Cells("alamat_pel").Value = dt.Rows(i).Item(7)
                     .Rows(i).Cells("gol_pel").Value = dt.Rows(i).Item(8)
+                    .Rows(i).Cells("created_at").Value = dt.Rows(i).Item(9)
                 End With
                 DataGridView1.Sort(DataGridView1.Columns("no_pel"),
                                 System.ComponentModel.ListSortDirection.Ascending)
@@ -150,6 +151,9 @@ Public Class Antrian
                             MsgBox("Success", vbInformation)
                             cn.Close()
                             LoadTable()
+                            PageAdmin.title = "Riwayat"
+                            PageAdmin.FormPanel(Riwayat)
+                            Riwayat.LoadTableNow()
                         Catch ex As Exception
                             cn.Close()
                             MsgBox(ex.Message.ToString(), vbCritical)
